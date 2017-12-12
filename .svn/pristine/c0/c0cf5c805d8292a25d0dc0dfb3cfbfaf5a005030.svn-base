@@ -1,0 +1,63 @@
+package com.umpaytester.plat2cbe;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import com.umpay.platform2.util.HttpUtil;
+import com.umpaytester.spayrest.java.SpayRestOrderApi;
+import com.umpaytester.utils.log.Logger;
+
+
+
+/**
+ *作者：刘玉柱
+ *日期：2017年11月29日
+ *时间：下午12:05:57
+ *该类的功能:
+**/
+
+
+public class TestBF221016 {
+	static Logger log=Logger.getLogger(TestBF221016.class);  
+
+	public static String rest = "http://10.10.178.36:19998";//测试环境
+//	public static String rest = "http://10.10.56.162:8089";
+	static int j =0;
+	public static void main(String[] args) {
+		for (int i = 20171201; i < i+30; i++) {
+		 j++;
+		 if(j<30) {
+			 TestBF221016.TestBF221016(""+i);
+			log.info("处理日期："+i);
+		 }
+		}
+	}
+	public static void TestBF221016(String handleDate){
+
+    	Map<String,Object> params = new HashMap<String,Object>();
+    	 params.put("rpid","PSP183712d278937");
+
+    	 params.put("handleDate",handleDate);
+    	 params.put("threshold","100");
+//   	params.put("reqDate","20170807");
+
+
+    	 //params.put("nation","HKG");
+    	String url = "/cbe/BF221016";
+    	Map<String,Object> result = null;
+    	try {
+    		result = HttpUtil.httpPostForm2Xml(rest+url, params,"utf-8");
+    		
+			Iterator<Map.Entry<String,Object>> entry = result.entrySet().iterator();
+			while(entry.hasNext()){
+				Map.Entry<String, Object> kv = entry.next();
+				log.info(String.format("%s=%s", kv.getKey(),kv.getValue()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    
+	}
+
+}

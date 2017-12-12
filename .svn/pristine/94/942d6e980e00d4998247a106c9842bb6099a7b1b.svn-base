@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-net-3.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.8.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hamcrest-library-1.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mpsp_common.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/myUtils.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/plweb.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.5.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.5.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/snakeyaml-1.16.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/umf-rest-api-sdk.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/umpay_bs3_v4.1740.120301.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/umpay-commons-cc-util-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="WebContent/editor/jsp/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/editor/jsp/lib/commons-fileupload-1.3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/editor/jsp/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/editor/jsp/lib/json.jar"/>
+	<classpathentry kind="lib" path="WebContent/editor/jsp/lib/ueditor-1.1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-2.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-api-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-firefox-driver-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-java-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-remote-driver-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-server-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/selenium-server-standalone-2.44.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/db2jcc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/db2jcc4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsch-0.1.54.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ganymed-ssh2-262.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/swingx-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jai-imageio-1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsoup-1.6.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/platform2_soa-2.8.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xstream.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/file/app/apache-tomcat-9.0.0.M17-windows-x64/apache-tomcat-9.0.0.M17/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="D:/file/app/apache-tomcat-9.0.0.M17-windows-x64/apache-tomcat-9.0.0.M17/lib/websocket-api.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

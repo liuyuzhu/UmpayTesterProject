@@ -1,0 +1,60 @@
+package com.umpaytester.spay.test;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+import com.umpaytester.spay.bean.SpayBean;
+import com.umpaytester.spay.util.SignForSYTForWeb;
+import com.umpaytester.utils.log.Logger;
+
+/**
+ *作者：刘玉柱
+ *日期：2017年11月14日
+ *时间：下午2:57:14
+ *该类的功能:
+**/
+
+public class DebitCardCbApplyPayShortcut {
+	static Logger log=Logger.getLogger(DebitCardCbApplyPayShortcut.class);  
+
+	public static  String  test() {
+		
+		SpayBean bean = new SpayBean();
+		bean.getService();
+		 Map<String ,Object>  request = new  TreeMap<String, Object>();
+		 request.put("service",bean.getService());
+		 request.put("interface_type",bean.getInterface_type());
+		 request.put("charset",bean.getCharset());
+		 request.put("mer_id",bean.getMer_id());
+		 request.put("sign_type",bean.getSign_type());
+		 request.put("ret_url",bean.getRet_url());
+		 request.put("notify_url",bean.getNotify_url());
+		 request.put("res_format",bean.getRes_format());
+		 request.put("version",bean.getVersion());
+		 request.put("order_id",bean.getOrder_id());
+		 request.put("mer_date",bean.getMer_date());
+		 request.put("amount",bean.getAmount());
+		 request.put("currency",bean.getCurrency());
+		 request.put("risk_expand",bean.getRisk_expand());
+		 request.put("pay_type",bean.getPay_type());
+		 request.put("goods_data",bean.getGoods_data());
+		 request.put("goods_inf",bean.getGoods_info());
+//		 request.put("gate_id",bean.getGate_id());
+		 SignForSYTForWeb sign = new SignForSYTForWeb();
+		 log.info("数据验证并发送...");
+		 String RetMsg=sign.sign(request, bean.getUrl());
+		 log.info(RetMsg);
+		 String url ="";
+
+		 if(RetMsg.contains("请求支付插件的url")) {
+			 url=RetMsg.substring(RetMsg.indexOf("插件的url="));
+			 log.info(url);
+			 
+		 }
+		return RetMsg; 
+		
+	}
+
+}
+
+

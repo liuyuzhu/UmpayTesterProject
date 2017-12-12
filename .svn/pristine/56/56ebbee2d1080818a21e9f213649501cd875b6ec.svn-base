@@ -1,0 +1,154 @@
+	@SerializedName("total_cny")
+	private String totalCny;		//浜烘皯甯侀噾棰�,鍗曚綅鍏�,鏈�澶氭敮鎸佸皬鏁扮偣鍚庝袱浣嶇殑鏁板瓧
+	
+	@SerializedName("exchange_rate")
+	private ExchangeRate exchangeRate;//姹囩巼
+	
+	@SerializedName("org_amount")
+	
+	
+	@SerializedName("mer_reference_id")
+	private String merReferenceId;		//璁㈠崟鍙峰晢鎴风敓浜т繚璇佷氦鏄撳敮涓�鎬х殑ID
+	
+	@SerializedName("mer_date")
+	private String merDate;				//鍟嗘埛璁㈠崟鏃ユ湡
+	
+	private Amount amount;				//浠樻閲戦瀵硅薄
+	
+	@SerializedName("order_summary")
+	private String orderSummary;		//璁㈠崟绠�瑕佽鏄�
+
+	@SerializedName("expire_time")
+	private String expireTime;			//杩囨湡鏃堕棿
+	
+	@SerializedName("user_ip")
+	private String userIp;				//涓嬪崟IP
+
+	@SerializedName("sub_orders")
+	@SerializedName("mer_sub_reference_id")
+	private String merSubReferenceId;	//鍟嗘埛瀛愯鍗曞彿
+	
+	@SerializedName("trans_code")
+	private String transCode;		//瀛愯鍗曚笟鍔＄紪鐮�
+	
+	private Amount amount;			//瀛愯鍗曢噾棰�
+	
+	@SerializedName("is_customs")
+	private String isCustoms;			//鏄惁鎶ュ叧
+	
+	@SerializedName("invoice_id")
+	
+	
+		@SerializedName("mer_item_id")
+	private String merItemId;	//鍟嗗搧缂栧彿
+	
+	private ItemType type;		//鍟嗗搧绫诲瀷
+	
+	private String name;		//鍟嗗搧鍚嶇О
+	
+	@SerializedName("quantity")
+	private String itemQuantity;	//鍟嗗搧鏁伴噺
+	
+	private String description;	//鍟嗗搧鎻忚堪
+	
+	private Amount amount;		//鍟嗗搧鎬婚噾棰濆璞�
+	
+	@SerializedName("payment_method")
+	private PaymentMethod paymentMethod;//鏀粯鏂瑰紡
+	
+	@SerializedName("bank_code")
+	private String bankCode;			//閾惰缂栫爜
+	
+	@SerializedName("payer_info")
+	private PayerInfo payerInfo;		//浠樻浜鸿缁嗕俊鎭�
+
+	@SerializedName("interface_type")
+	private InterfaceType interfaceType;		//浠樻浜鸿缁嗕俊鎭�
+	
+	@SerializedName("external_customer_id")
+	private String externalCustomerId;	// 鍟
+	
+	@SerializedName("bank_card")
+	private BankCard bankCard;		//閾惰鍗℃敮浠樹俊鎭疄浣撶被
+	@SerializedName("qr_code_scan")
+	private QrCodeScan qrCodeScan;	//涓绘壂瀹炰綋绫�
+	@SerializedName("payer_agreement")
+	private PayerAgreement payerAgreement;//鍗忚鏀粯淇℃伅瀹炰綋绫�
+	@SerializedName("phone")
+	private String phone;//鍗忚鏀粯淇℃伅瀹炰綋绫�
+	@SerializedName("name")
+	private String payerName;//鍗忚鏀粯淇℃伅瀹炰綋绫�
+	@SerializedName("wechat_in_app")
+	private WechatInApp wechatInApp;//APP鏀粯
+	@SerializedName("wechat_in_app_web")
+	private WechatInAppWeb  wechatInAppWeb;//
+	@SerializedName("number")
+	private String cardNumber;		//閾惰鍗″彿(RSA)
+	
+	@SerializedName("citizen_id_number")
+	private String citizenIdNumber;		//璇佷欢鍙风爜(RSA)
+	
+	@SerializedName("citizen_id_type")
+	private CitizenIdType citizenIdType;		//璇佷欢绫诲瀷
+	
+	@SerializedName("payer_name")
+	private String payerName;			//鎸佸崱浜哄鍚�(RSA)
+	
+	@SerializedName("valid_date")
+	private String validDate;			//鏈夋晥鏈�(YYMM)
+	
+	private String cvv2;				//CVV2(RSA)
+	
+	private String phone;				//浠樻浜虹數璇�
+	
+	private String state;				//鐘舵�侊紝expired,ok锛寀navailable锛堜緥濡傛寕澶憋級
+	
+	@SerializedName("verify_code")
+	private String verifyCode;			//鐭俊楠岃瘉鐮�
+	@SerializedName("trans_type")
+	private String B0002;				//B0002  浜ゆ槗绫诲瀷  		01鍏呭�笺��02娑堣垂	Y
+	
+	@SerializedName("receiver_name")
+	private String B0003;				//B0003	鏀惰揣浜哄鍚�		String	鎺ユ敹鏀惰揣淇℃伅鐨勪汉鐨勫鍚嶏紝锛屽綋D0008涓�1鎴�3鏃讹紝璇ュ瓧娈靛繀濉�	C
+	
+	@SerializedName("receiver_moblie_id")
+	private String B0004;				//B0004	鏀惰揣浜烘墜鏈哄彿		String(11浣�)	鎺ユ敹鏀惰揣淇℃伅鐨勪汉鐨勮仈绯绘柟寮忥紝褰揇0008涓�1鎴�3鏃讹紝璇ュ瓧娈靛繀濉紝渚嬪锛� 13800011111	C
+	
+	@SerializedName("shipping_address")
+	private String B0005;				//B0005	閫佽揣鍦板潃		String	鏀惰揣鍦板潃锛屽綋D0008涓�1鎴�3鏃讹紝璇ュ瓧娈靛繀濉�	C
+	
+	@SerializedName("registration_email")
+	private String B0006;				//B0006	娉ㄥ唽email		String	鐢ㄦ埛娉ㄥ唽email锛屽繀椤绘槸鍟嗘埛宸查獙璇佽繃鐨�	N
+	
+	@SerializedName("registration_moblie_id")
+	private String B0007;				//B0007	娉ㄥ唽鎵嬫満鍙�		String(11浣�)	娉ㄥ唽浜烘墜鏈哄彿鐮�	N
+	
+	@SerializedName("identify_card_number")
+	private String B0008;				//B0008	韬唤璇佸彿		String	娉ㄥ唽浜鸿韩浠借瘉鍙凤紝褰揇0009涓�1鏃讹紝璇ュ瓧娈靛繀濉�	C
+	
+	@SerializedName("device_identification")
+	private String D0001;				//D0001	璁惧鏍囪瘑		String	鍟嗘埛渚х敓鎴愮殑璁惧鍞竴鏍囪瘑锛屽鎵嬫満MAC鐮侊紝鎴栨槸鍐呴儴瀹氫箟鐨勭粓绔瘑鍒獻D銆�	N
+	
+	@SerializedName("device_type")
+	private String D0002;				//D0002	璁惧绫诲瀷		String	瀹㈡埛绔舰鎬佷骇鍝佸～鍐欐墜鏈哄瀷鍙凤紱椤甸潰褰㈡�佷骇鍝佸～鍐欐祻瑙堝櫒User-Agent淇℃伅锛屽鏄疻eb绔敤鎴峰垯涓嶅彲涓虹┖銆侫PP鍙负绌恒��	N
+	
+	@SerializedName("user_ip")
+	private String D0003;				//D0003	鐢ㄦ埛ID		String	鍟嗘埛渚х敤鎴锋爣璇嗭紝鍙互鏄暟鎹簱涓婚敭鏍囪瘑锛屼篃鍙互鏄敤鎴风櫥闄唅d	N
+	
+	@SerializedName("registration_time")
+	private String D0004;				//D0004	鐢ㄦ埛娉ㄥ唽鏃堕棿		String	鐢ㄦ埛娉ㄥ唽璇ヤ骇鍝佺殑鏃堕棿锛岀簿纭埌绉掋�備緥濡傦細 20150311120000	N
+	
+	@SerializedName("user_agent")
+	private String D0005;				//D0005	浜у搧褰㈡��		String	1-android瀹㈡埛绔紱2-IOS瀹㈡埛绔紱3-PC绔紙web椤甸潰锛夛紱4-鎵嬫満绔紙wap鎴杊tml5绛夐〉闈級锛�	N
+	
+	@SerializedName("success_transactions_number")
+	private String D0007;				//D0007鐢ㄦ埛鎴愬姛浜ゆ槗绗旀暟	String	鐢ㄦ埛鍦ㄥ晢鎴风鎴愬姛浜ゆ槗鐨勭瑪鏁�	N
+	
+	@SerializedName("goods_type")
+	private String D0008;				//D0008	鍟嗗搧鍒嗙被		String	0锛氳櫄鎷熺被/  1锛氬疄鐗╃被/ 2锛氭満绁ㄧ被/ 3锛�3C绫�	Y
+	
+	@SerializedName("real_name")
+	private String D0009;				//D0009	鍟嗗搧瀹炲悕鍒惰喘涔�	String	0锛氶潪瀹炲悕鍒讹紝1锛氬疄鍚嶅埗	Y
+	
+	@SerializedName("business_type")
+	

@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/css/style.css=UTF-8
+encoding//WebContent/jsp/spay/spay.jsp=UTF-8
+encoding//WebContent/jsp/spay/test.jsp=UTF-8
+encoding//src/com/umpaytester/spay/util/SignForSYT.java=UTF-8
+encoding//src/com/umpaytester/spay/util/SignForSYTForWeb.java=UTF-8
+encoding//src/com/umpaytester/spayrest/util/GenerateClientToken.java=UTF-8
+encoding//src/com/umpaytester/utils/AccountConst.java=UTF-8
+encoding//src/config/env.properties=UTF-8
+encoding//src/config/log4j.properties=UTF-8
+encoding//src/config/sdf=UTF-8
+encoding/<project>=UTF-8

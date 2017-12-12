@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.text.*" %>   
+<%@ page import="java.util.*" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>gettoken.jsp</title>
+	</head>
+	<body >
+
+		<form name="gettoken" method="post" action="/UmpayTesterProject/GetTokenServlet">
+				<table  style="width: 100px; height: 40px;" border="0" cellpadding="0" cellspacing="0">
+				<tbody style="height: 40px;">
+				
+			<td style="height: 40px;" valign="middle"> spay_rest地址</td>
+					<td><select  id="spaytest" name="url"    >
+                                                <option value="http://10.10.178.34:8071/spay_rest/oauth/authorize" >http://10.10.178.34</option>
+                                                <option value="http://10.10.178.35:8071/spay_rest/oauth/authorize" >http://10.10.178.35</option>
+                                                <option value="http://10.10.178.36:8071/spay_rest/oauth/authorize" "selected="selected" >http://10.10.178.36</option>
+					</select></td>
+					
+					
+					
+	                  <tr style="height: 40px;"><td style="height: 40px;" valign="middle">mer_id</td><td><input style="width: 100%; height: 100%;border:5px solid blue;padding:5px;background-color:transparent;" type=text name="mer_id" value="70510000" /></td></tr>
+	                  <tr style="height: 40px;"><td style="height: 40px;" valign="middle">client_id</td><td><input style="width: 100%; height: 100%;border:5px solid blue;padding:5px;background-color:transparent;" type=text name="client_id" value="74a5945930aaefbfd89594f5bb89308cc52f594a" /></td></tr>
+	                  <tr style="height: 40px;"><td style="height: 40px;" valign="middle">client_secret</td><td><input style="width: 100%; height: 100%;border:5px solid blue;padding:5px;background-color:transparent;" type=text name="client_secret" value="97a807a101ede5c14957770d0953a8017b28e815" /></td></tr>
+	                  <tr style="height: 40px;"><td style="height: 40px;" valign="middle">scope</td><td><input style="width: 100%; height: 100%;border:5px solid blue;padding:5px;background-color:transparent;" type=text name="scope" value="kuajingtester" /></td></tr>
+	                  <tr style="height: 40px;"><td style="height: 40px;" valign="middle">grant_type</td><td><input style="width: 100%; height: 100%;border:5px solid blue ;padding:5px;background-color:transparent;" type=text name="client_id" value="client_credentials" /></td></tr>
+		
+	</tbody>
+</table>
+		<td colspan=2 align=center><input type=submit value="获取token"  /></td></tr>
+
+</form>
+</body>
+</html>

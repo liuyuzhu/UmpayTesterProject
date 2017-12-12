@@ -1,0 +1,56 @@
+package com.umpaytester.utils.db;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.umpaytester.utils.SQLUtil;
+import com.umpaytester.utils.log.Logger;
+
+/**
+ *作者：刘玉柱
+ *日期：2017年11月15日
+ *时间：下午5:31:29
+ *该类的功能:
+**/
+
+public class QueryDB {
+    static Logger log=Logger.getLogger(QueryDB.class);  
+
+    public static String queryTraceByOrderId(String orderId) {
+    	SQLUtil sqlUtil = new SQLUtil();
+    	String trace=""	;
+    	String sql="select t2.trace from umpay.T_PTRANS_"+getWeek()+" t2 where t2.ORDERID='"+orderId+"' order by t2.trace desc";
+        List<Map<String, String>>  result=null;
+        
+        try {
+			result=sqlUtil.excuteQuery(sql)    	;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.info("根据订单号查询trace号失败");
+		}
+        trace=result.get(0).get("TRACE");
+        log.info("TRACE号为："+trace);
+
+		return trace;
+    	
+    	
+    }
+    public static int getWeek(){
+		  Calendar cal = Calendar.getInstance();  
+		     Date curDate = new Date(System.currentTimeMillis());  
+		     cal.setTime(curDate);  
+		     int w = cal.get(Calendar.DAY_OF_WEEK) - 1;  
+		     if (w < 0)  
+		         w = 0;
+			return w;  
+	}
+    
+    public static void main(String[] args) {
+		String orderId="20171115114249"	;
+		QueryDB.queryTraceByOrderId(orderId);
+	}
+}
+
+

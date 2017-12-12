@@ -1,0 +1,10 @@
+client_id=74a5945930aaefbfd89594f5bb89308cc52f594a
+client_secret=97a807a101ede5c14957770d0953a8017b28e815
+mer_id=70510000
+url=http://10.10.178.34:8071/spay_rest/payments/payment
+restOauthUrl=http://10.10.178.34:8071/spay_rest/oauth/authorize
+crtPath=testUmpay.cert.crt
+p8Path=testMer.key.p8
+UMFp8Path=testUmpay.key.p8
+
+

@@ -1,0 +1,99 @@
+package com.umpaytester.utils.log;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.apache.log4j.PropertyConfigurator;
+
+import com.umpaytester.utils.PropertyUtil;
+
+public class Log4jConfig {  
+    private static boolean isReload = true; 
+    public static void load() throws IOException {
+    	 String path = Log4jConfig.class.getClass().getResource("/")  
+                 .getPath()
+                 + "config/log4j.properties";
+//    	 
+//         String path="config/log4j.properties";   
+//         System.out.println("log4j configfile path=" + path);  
+         PropertyConfigurator.configureAndWatch(path,1000);    
+    	
+//    	FileInputStream inputStream=null;        
+//    	ClassLoader cl = Log4jConfig.class.getClassLoader();        
+//    	if  (cl !=  null ) {        
+//    	         inputStream = (FileInputStream) cl.getResourceAsStream( "config/log4j.properties" );        
+//    	}  else {        
+//    	       inputStream = (FileInputStream) ClassLoader.getSystemResourceAsStream( "config/log4j.properties" );        
+//    	}        
+//    	System.out.println(inputStream);
+//
+//		
+//	     PropertyConfigurator.configure(inputStream);
+//	     inputStream.close();
+
+
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+//    	
+//    	
+//     Properties props = new Properties();
+//        try {
+//			props.load(Log4jConfig.class.getClassLoader().getResourceAsStream("log4j.properties"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}//从输入流中读取属性列表
+//         PropertyConfigurator.configure(props);
+//  	  
+    }  
+   
+    private static void reload() throws IOException {  
+        if (isReload) {  
+            load();  
+        }  
+        isReload = false;  
+    }  
+   
+    public void setReload(boolean flag) {  
+        isReload = flag;  
+    }  
+   
+    
+    /**
+     * 初始化log4j配置信息
+     * @throws Exception
+     */
+    public static void initLog4j() throws Exception{
+    
+           Properties props = new Properties();
+
+    	   props = new Properties();
+	        InputStream in = null;
+	        
+	   //    　<!--第一种，通过类加载器进行获取properties文件流-->
+          in = PropertyUtil.class.getClassLoader().getResourceAsStream("config/log4j.properties");
+
+           props.load(in);//从输入流中读取属性列表
+           PropertyConfigurator.configure(props);
+      
+      
+    	   in.close();
+       
+    
+
+    
+}
+    
+    public static void main(String[] args) throws IOException {
+    	System.out.println(Log4jConfig.class.getClass().getResource("/")  
+                .getPath().replaceAll("/build/classes", "/WebContent")  
+                + "config/log4j.properties");
+	}
+}

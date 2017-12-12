@@ -1,0 +1,538 @@
+package com.umpaytester.spayrest.java;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.umf.api.payments.Amount;
+import com.umf.api.payments.BankCard;
+import com.umf.api.payments.Item;
+import com.umf.api.payments.Order;
+import com.umf.api.payments.Payer;
+import com.umf.api.payments.PayerInfo;
+import com.umf.api.payments.Payment;
+import com.umf.api.payments.QrCodeScan;
+import com.umf.api.payments.Refund;
+import com.umf.api.payments.RiskInfo;
+import com.umf.api.payments.SubOrder;
+import com.umf.api.payments.WechatInApp;
+import com.umf.api.payments.WechatInAppWeb;
+import com.umf.api.payments.enums.BusinessType;
+import com.umf.api.payments.enums.CitizenIdType;
+import com.umf.api.payments.enums.InterfaceType;
+import com.umf.api.payments.enums.ItemType;
+import com.umf.api.payments.enums.PaymentMethod;
+import com.umf.base.ReqUMF;
+import com.umf.base.rest.APIContext;
+import com.umpaytester.spayrest.bean.SpayRestBean;
+import com.umpaytester.spayrest.servlet.SpayRestOrderApiServlet;
+import com.umpaytester.utils.GetSms;
+import com.umpaytester.utils.JsonPrintToHtmlUtil;
+import com.umpaytester.utils.JsonPrintUtil;
+import com.umpaytester.utils.PrintUtil;
+import com.umpaytester.utils.log.Logger;
+
+import net.sf.json.JSONObject;
+
+/**
+ * @author yuzhuliu:
+ * @version 
+ */
+public class FastTestWholeProcess {
+	static JsonPrintUtil jsonPint=new JsonPrintUtil();
+
+	static Logger log=Logger.getLogger(FastTestWholeProcess.class);  
+	static String orderResult="";
+	static String varifyResult="";
+	static String payConfirmResult="";
+	static String queryResult="";
+	static String refundResult="";
+	static String refundQueryResult="";
+	static String declareResult="";
+
+	static String varifyUrl="";
+	static String payConfirmUrl="";
+	static String queryUrl="";
+	static String refundUrl="";
+	static String refundQueryUrl="";
+	static String declareUrl="";
+	static String varifyCode="";
+	
+	public static void  order (SpayRestBean bean) throws Exception {
+		log.info("下单开始："+bean.getMer_reference_id());
+		APIContext apiContext = APIContext(bean);
+		Payment payment = Payment(bean);
+		try {
+			orderResult = ReqUMF.post(apiContext, payment);
+			jsonPint.formatJson(orderResult);
+			try {
+				varifyUrl= orderResult.toString().substring(orderResult.indexOf("sms_verify\",\"method\":\"GET\",\"href\":\"")+35, orderResult.lastIndexOf("\"}]}")).replaceAll("179", "178");
+		
+				bean.setUrl(varifyUrl);
+			} catch (Exception e) {
+				log.info("获取鉴权地址失败");
+			}
+		} catch (Exception e) {
+			log.info("下单失败");
+		}
+	}
+	
+	public static void  varify (SpayRestBean bean) throws Exception {
+		log.info("下发短信开始："+bean.getUrl());
+		APIContext apiContext = APIContext(bean);
+		Payment payment = Payment(bean);
+		try {
+			varifyResult = ReqUMF.post(apiContext, payment);
+			jsonPint.formatJson(varifyResult);
+
+			Thread.sleep(10000);
+			try {
+				payConfirmUrl= varifyResult.toString().substring(varifyResult.indexOf("confirm\",\"method\":\"POST\",\"href\":\"")+33, varifyResult.lastIndexOf("\"}]}")).replaceAll("179", "178");
+				bean.setUrl(payConfirmUrl);
+			} catch (Exception e) {
+				log.info("获取确认支付地址失败");
+			}
+		} catch (Exception e) {
+			log.info("下发短信失败");
+		}
+	}
+	
+	
+	public static void  getSms (SpayRestBean bean) throws Exception {
+		GetSms getsms= new GetSms();
+		log.info("获取短信开始："+bean.getMer_reference_id());
+		try {
+			varifyCode = getsms.querySmsByOrderId(bean.getMer_reference_id());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("未获取到短信验证码，请检查短信下发流程");
+		}
+
+	}
+	
+	public static void  pay (SpayRestBean bean) throws Exception {
+		log.info("支付确认开始："+bean.getUrl());
+		APIContext apiContext = APIContext(bean);
+		Payment payment = Payment(bean);
+		try {
+			payConfirmResult = ReqUMF.post(apiContext, payment);
+			jsonPint.formatJson(payConfirmResult);
+
+			try {
+				refundUrl= varifyResult.toString().substring(payConfirmResult.indexOf("refund\",\"method\":\"POST\",\"href\":\"")+32, payConfirmResult.lastIndexOf("\"}]}")).replaceAll("179", "178");
+				declareUrl=refundUrl.replaceAll("refund", "apply_to_customs");
+				bean.setUrl(refundUrl);
+			} catch (Exception e) {
+				log.info("获取退费地址失败");
+			}
+		} catch (Exception e) {
+			log.info("确认支付失败");
+		}
+	}
+	
+	
+	public static void  refund (SpayRestBean bean) throws Exception {
+		log.info("退费开始："+bean.getUrl());
+		APIContext apiContext = APIContext(bean);
+		Refund refund =new Refund();
+		
+		 Order order = new Order();
+		 bean.setRefundNo(bean.getMer_reference_id().substring(1)+"0");
+		 order.setMerReferenceId(bean.getRefundNo());
+		 log.info("退费单号长度："+bean.getRefundNo().length());
+		 Amount amount = new Amount();
+		 amount.setTotal(bean.getSubamount1());
+		 amount.setCurrency(bean.getCurrency());
+		 order.setAmount(amount);
+	       SubOrder suborder1 = new SubOrder();
+	       
+           suborder1.setMerSubReferenceId(bean.getMer_sub_reference_id());
+           suborder1.setTransCode(bean.getTrans_code());
+//           suborder1.g
+               Amount amount1 = new Amount();
+               amount1.setTotal(bean.getSubamount1());
+               amount1.setCurrency(bean.getCurrency());
+           suborder1.setAmount(amount1);
+           List<SubOrder> subOrders = new ArrayList<SubOrder>();   
+           subOrders.add(suborder1);
+           order.setSubOrders(subOrders);
+		 
+		 refund.setOrder(order);
+		 
+		
+		try {
+			refundResult = ReqUMF.postRefund(apiContext, refund);
+			jsonPint.formatJson(refundResult);
+
+			try {
+				queryUrl=  refundResult.substring(refundResult.indexOf("self\",\"method\":\"GET\",\"href\":\"")+29, refundResult.lastIndexOf("\"}],\"refund\"")).replaceAll("179", "178");
+				bean.setUrl(queryUrl);
+			} catch (Exception e) {
+				log.info("获取退费查询地址失败");
+			}
+		} catch (Exception e) {
+			log.info("退费失败");
+		}
+	}
+	
+	
+	public static void queryRefund(SpayRestBean bean) {
+		log.info("退费查询开始："+bean.getUrl());
+		APIContext apiContext = APIContext(bean);
+		try {
+			refundQueryResult = ReqUMF.get(apiContext);
+			jsonPint.formatJson(refundQueryResult);
+
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		log.info(refundQueryResult);
+		
+	}
+	
+public static APIContext APIContext(SpayRestBean bean)  {
+		
+	    APIContext apiContextBase = new APIContext();
+
+		apiContextBase.setClientId(bean.getClientId());
+		apiContextBase.setClientSecret(bean.getClientSecret());
+		apiContextBase.setOauthUrl(bean.getOauth_url());
+		
+		apiContextBase.setToken(bean.token);
+		apiContextBase.setCrtPath(bean.crtPath);
+		apiContextBase.setP8Path(bean.p8Path);
+		apiContextBase.setUMFp8Path(bean.UMFp8Path);
+//		apiContextBase.setType("POST");
+		apiContextBase.setUrl(bean.url);
+		apiContextBase.setRSACharset("GBK");
+		return apiContextBase;
+		
+		}
+
+public static Payment getPayment(SpayRestBean bean) {
+	Payment payment=new Payment();
+	 Payer payer=new Payer();
+	 payer.setBusinessType(BusinessType.B2C);
+     payer.setPaymentMethod(PaymentMethod.CREDIT_CARD);
+     payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+     payer.setBankCode(bean.getBank_code());
+      PayerInfo payerInfo=new PayerInfo();
+       BankCard bc = new BankCard();
+       bc.setCardNumber(bean.getNumber());
+       bc.setCitizenIdNumber(bean.getCitizen_id_number());
+       bc.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+       bc.setPayerName(bean.getPayer_name());
+       bc.setValidDate(bean.getValid_date());
+       bc.setCvv2(bean.getCvv2());
+       bc.setPhone(bean.getPhone());
+       payerInfo.setBankCard(bc);
+		  QrCodeScan qcs = new QrCodeScan();
+          qcs.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+          qcs.setCitizenIdNumber(bean.getCitizen_id_number());
+		 
+		     WechatInApp wechat1 = new WechatInApp();
+             wechat1.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+             wechat1.setCitizenIdNumber(bean.getCitizen_id_number());
+             payerInfo.setWechatInApp(wechat1);
+		 
+		 
+        WechatInAppWeb wechat = new WechatInAppWeb();
+        wechat.setOpenId(bean.getOpen_id());
+        wechat.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+        wechat.setCitizenIdNumber(bean.getCitizen_id_number());
+        payerInfo.setWechatInAppWeb(wechat);
+		 
+		 
+      payer.setPayerInfo(payerInfo);
+      
+     
+      payment.setPayer(payer);
+	 
+	 
+	 
+	 
+	 
+	return payment;
+	
+}
+
+	
+	public static  Payment Payment(SpayRestBean bean) {
+//		BaseTest test = new BaseTest();
+		
+		Payment payment=new Payment();
+
+		 Payer payer=new Payer();
+		 payer.setBusinessType(BusinessType.B2C);
+		 log.info(bean.getPayment_method());
+		 if(bean.getPayment_method().equals("CREDIT_CARD")) {
+		      payer.setPaymentMethod(PaymentMethod.CREDIT_CARD);
+		      payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+		      payer.setBankCode(bean.getBank_code());
+		       PayerInfo payerInfo=new PayerInfo();
+		        BankCard bc = new BankCard();
+		        bc.setCardNumber(bean.getNumber());
+		        bc.setCitizenIdNumber(bean.getCitizen_id_number());
+		        bc.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		        bc.setPayerName(bean.getPayer_name());
+		        bc.setValidDate(bean.getValid_date());
+		        bc.setCvv2(bean.getCvv2());
+		        bc.setPhone(bean.getPhone());
+		        payerInfo.setBankCard(bc);
+		       payer.setPayerInfo(payerInfo);
+		       
+		      
+		       payment.setPayer(payer);
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				
+				 payment.setRiskInfo(riskInfo);
+				 log.info("信用卡支付");
+		 }
+		 
+		 else if(bean.getPayment_method().equals("DEBIT_CARD")) {
+ 
+		 
+		 payer.setPaymentMethod(PaymentMethod.DEBIT_CARD);
+
+		  payer.setBankCode("CITIC");
+
+		     PayerInfo payerInfo=new PayerInfo();
+		      BankCard bc = new BankCard();
+		      bc.setValidDate(bean.getValid_date());
+		      bc.setCvv2(bean.getCvv2());
+		      bc.setPhone(bean.getPhone());
+		      
+		        bc.setCardNumber(bean.getNumber());
+		        bc.setCitizenIdNumber(bean.getCitizen_id_number());
+		        bc.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		        bc.setPayerName(bean.getPayer_name());
+		      
+		      payerInfo.setBankCard(bc);
+		     payer.setPayerInfo(payerInfo);
+		     
+		    
+
+		     payment.setPayer(payer);
+		
+		    
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				
+				payment.setRiskInfo(riskInfo);
+				 log.info("借记卡支付");
+
+		 }
+		 else if(bean.getPayment_method().equals("WECHAT_SCAN")) {
+		      payer.setPaymentMethod(PaymentMethod.WECHAT_SCAN);		  
+		      payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+		      PayerInfo payerInfo=new PayerInfo();
+		         payerInfo.setPayerName(bean.getPayer_name());
+		         
+		         payerInfo.setPhone(bean.getPhone());
+		         QrCodeScan qcs = new QrCodeScan();
+		         
+		         qcs.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		         qcs.setCitizenIdNumber(bean.getCitizen_id_number());
+		         payerInfo.setQrCodeScan(qcs);
+		         payer.setPayerInfo(payerInfo);
+		      payment.setPayer(payer);
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				
+				payment.setRiskInfo(riskInfo);
+				 log.info("微信主扫");
+
+		 }	
+		 else if(bean.getPayment_method().equals("ALIPAY_SCAN")) {
+		      payer.setPaymentMethod(PaymentMethod.ALIPAY_SCAN);
+		      payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+		      PayerInfo payerInfo=new PayerInfo();
+		         payerInfo.setPayerName(bean.getPayer_name());
+		         
+		         payerInfo.setPhone(bean.getPhone());
+		         QrCodeScan qcs = new QrCodeScan();
+		         
+		         qcs.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		         qcs.setCitizenIdNumber(bean.getCitizen_id_number());
+		         payerInfo.setQrCodeScan(qcs);
+		         payer.setPayerInfo(payerInfo);
+		      payment.setPayer(payer);
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				
+				payment.setRiskInfo(riskInfo);
+				 log.info("支付宝主扫");
+
+		 }	
+		 else if(bean.getPayment_method().equals("WECHAT_IN_APP")) {
+		      payer.setPaymentMethod(PaymentMethod.WECHAT_IN_APP);
+		      payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+		      PayerInfo payerInfo=new PayerInfo();
+		         payerInfo.setPayerName(bean.getPayer_name());
+		         payerInfo.setPhone(bean.getPhone());
+		         WechatInApp wechat1 = new WechatInApp();
+		         wechat1.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		         wechat1.setCitizenIdNumber(bean.getCitizen_id_number());
+		         payerInfo.setWechatInApp(wechat1);
+		         payer.setPayerInfo(payerInfo);
+		      payment.setPayer(payer);
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				payment.setRiskInfo(riskInfo);
+				 log.info("微信app支付");
+
+		 }	
+		 else if(bean.getPayment_method().equals("WECHAT_WEB")) {
+		      payer.setPaymentMethod(PaymentMethod.WECHAT_WEB);
+		      payer.setInterfaceType(InterfaceType.SERVER_TO_SERVER);
+		      PayerInfo payerInfo=new PayerInfo();
+		         payerInfo.setPayerName(bean.getPayer_name());
+		         payerInfo.setPhone(bean.getPhone());
+		         WechatInAppWeb wechat = new WechatInAppWeb();
+		         wechat.setOpenId(bean.getOpen_id());
+		         wechat.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+		         wechat.setCitizenIdNumber(bean.getCitizen_id_number());
+		         payerInfo.setWechatInAppWeb(wechat);
+		         payer.setPayerInfo(payerInfo);
+		      payment.setPayer(payer);
+		      RiskInfo riskInfo = new RiskInfo();
+				 riskInfo.setB0002("02");
+				payment.setRiskInfo(riskInfo);
+				 log.info("微信公众号");
+
+		 }
+		 else if(bean.getPayment_method().equals("NOT_APPLICABLE")) {
+			 log.info("进入收银台下单业务模块");
+			 
+			 
+		      if(bean.getInterface_type().equals("SERVER_TO_WEB")) {
+		    	  
+		    	  payer.setBankCode(bean.getBank_code());
+			       PayerInfo payerInfo=new PayerInfo();
+			       payer.setPayerInfo(payerInfo);
+			    payment.setPayer(payer);
+			      RiskInfo riskInfo = new RiskInfo();
+					 riskInfo.setB0002("02");
+					
+					payment.setRiskInfo(riskInfo);
+					log.info("收银台支付");
+		      }else {
+		    	  payer.setBankCode(bean.getBank_code());
+			       PayerInfo payerInfo=new PayerInfo();
+			       payerInfo.setPayerName(bean.getPayer_name());
+			       
+			    //   payerInfo.setPhone("15210909812");
+			       QrCodeScan qcs = new QrCodeScan();
+			       qcs.setQrCodeUrl(bean.getQr_code_url());
+			       qcs.setCitizenIdType(CitizenIdType.IDENTITY_CARD);
+			       qcs.setCitizenIdNumber(bean.getCitizen_id_number());
+			       payerInfo.setQrCodeScan(qcs);
+			       payer.setPayerInfo(payerInfo);
+			    payment.setPayer(payer);
+			      RiskInfo riskInfo = new RiskInfo();
+					 riskInfo.setB0002("02");
+					
+					payment.setRiskInfo(riskInfo);
+					 log.info("收银台H5支付");
+
+		      }
+		 }
+		
+
+		
+		 Order order = new Order();
+         
+   	   order.setMerReferenceId(bean.getMer_reference_id());
+          order.setMerDate(bean.getMer_date());
+
+             Amount amount = new Amount();
+             amount.setTotal(bean.getAmount());
+             amount.setCurrency(bean.getCurrency());
+         order.setAmount(amount);
+         order.setOrderSummary(bean.getOrder_summary());
+         order.setExpireTime(bean.getExpire_time());
+         
+                 SubOrder suborder1 = new SubOrder();
+                 suborder1.setMerSubReferenceId(bean.getMer_sub_reference_id());
+                 suborder1.setTransCode(bean.getTrans_code());
+	                       Amount amount1 = new Amount();
+                           amount1.setTotal(bean.getSubamount1());
+                           amount1.setCurrency(bean.getCurrency());
+                 suborder1.setAmount(amount1);
+                 //---------------------------------------------------------
+                 suborder1.setInvoiceId(bean.getInvoice_id());
+   
+//                   
+//                 SubOrder suborder2 = new SubOrder();
+//                 suborder2.setMerSubReferenceId(sub_order_id2);
+//                 suborder2.setTransCode("01121990");
+//                           Amount amount2 = new Amount();
+//                           amount2.setTotal("100.02");
+//                           amount2.setCurrency("USD");
+//                  suborder2.setAmount(amount2);
+//                  
+//                  //--------------------------------------------
+//                  suborder2.setIsCustoms("true");
+//                            Item item = new Item();
+//                            item.setMerItemId(goods_id1);
+//                            item.setType(ItemType.FOOD);
+//                            item.setName("banana");
+//                            item.setItemQuantity("2");
+//                            item.setDescription("banana");
+//                            Amount amount21 = new Amount();
+//                            amount21.setTotal("50.02");
+//                            amount21.setCurrency("USD");
+//                            item.setAmount(amount21);
+//                          
+//                            Item item2 = new Item();
+//                            item2.setMerItemId(goods_id2);
+//                            item2.setType(ItemType.ELECTRONIC);
+//                            item2.setName("yifu");
+//                            item2.setItemQuantity("3");
+//                            item2.setDescription("yifu");
+//                            
+//                             Amount amount22 = new Amount();
+//                              
+//                             amount22.setTotal("50.00");
+//                             amount22.setCurrency("USD");
+//                             item2.setAmount(amount22);
+//                          
+//                             List<Item> items = new ArrayList<Item>();
+//                             items.add(item);
+//                             items.add(item2);
+//                   suborder2.setItems(items);
+//                    
+
+                   List<SubOrder> subOrders = new ArrayList<SubOrder>();   
+//                   subOrders.add(suborder2);
+                   subOrders.add(suborder1);
+           order.setSubOrders(subOrders);
+ 
+           payment.setNotifyUrl(bean.getNotify_url());
+           payment.setOrder(order);
+           payment.setPayElements("");
+           payment.setRetUrl(bean.getRet_url());
+		return payment;
+		
+	}
+	
+
+
+}
+
+
+
+

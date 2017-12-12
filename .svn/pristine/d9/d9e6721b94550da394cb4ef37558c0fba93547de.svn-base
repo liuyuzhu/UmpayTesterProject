@@ -1,0 +1,60 @@
+2017-11-09 23:08:49,548 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:08:49,549 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:08:51,549 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:08:51,549 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:08:53,550 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:08:53,550 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:08:55,550 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:08:55,550 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:11:03,011 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:11:03,012 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:11:05,012 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:11:05,012 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:12:10,678 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:12:10,679 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:16:26,434 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 开始加载properties文件:log4j.properties
+2017-11-09 23:18:58,779 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 开始加载properties文件:log4j.properties
+2017-11-09 23:19:10,728 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 开始加载properties文件:config/log4j.properties
+2017-11-09 23:26:15,202 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-09 23:26:15,204 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-09 23:27:04,099 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 开始加载properties文件:config/log4j.properties
+2017-11-09 23:27:04,103 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 加载properties文件内容完成...........
+2017-11-09 23:27:04,104 [main] INFO  [com.umpaytester.utils.PropertyUtil] - info, Console, RollingFile
+2017-11-09 23:50:01,691 [main] INFO  [com.umpaytester.cbewebrest.util.SJHUtil] - 开始生成文件：RFXS_70510002_20171109_USD_SKJ2017110901689.txt
+2017-11-09 23:50:01,692 [main] INFO  [com.umpaytester.cbewebrest.util.SJHUtil] - 生成文件存放路径：D:\cbeweb_resttest\txt\RFXS_70510002_20171109_USD_SKJ2017110901689.txt
+2017-11-09 23:50:10,845 [main] INFO  [com.umpaytester.cbewebrest.test.main] -            - 收结汇上传文件测试开始--------
+2017-11-09 23:50:10,858 [main] INFO  [com.umpaytester.cbewebrest.util.SJHUtil] - 开始生成文件：RFXS_70510002_20171109_USD_SKJ2017110910856.txt
+2017-11-09 23:50:10,858 [main] INFO  [com.umpaytester.cbewebrest.util.SJHUtil] - 生成文件存放路径：D:\cbeweb_resttest\txt\RFXS_70510002_20171109_USD_SKJ2017110910856.txt
+2017-11-09 23:50:10,907 [main] INFO  [com.umpaytester.cbewebrest.util.FtpUtil] - 执行uploadFile方法，请求ip:10.10.178.36,上传至/usr/mpsp/data/ftp/merchant/70510002,文件名为:RFXS_70510002_20171109_USD_SKJ2017110910856.txt
+2017-11-09 23:50:10,984 [main] INFO  [com.umpaytester.cbewebrest.util.FtpUtil] - 上传成功!
+2017-11-09 23:50:10,988 [main] INFO  [com.umpaytester.cbewebrest.util.SJHUtil] - true
+2017-11-09 23:50:11,067 [main] INFO  [com.umpaytester.cbewebrest.util.PrintUtil] - -------请求------------
+2017-11-09 23:50:11,070 [main] INFO  [com.umpaytester.cbewebrest.util.PrintUtil] - {
+	"batch":{
+		"file_path":"/",
+		"batch_no":"SKJ2017110910856",
+		"file_name":"RFXS_70510002_20171109_USD_SKJ2017110910856.txt",
+		"currency":"USD",
+		"batch_date":"20171109"
+	},
+	"notify_url":"www.ww.ww"
+}
+2017-11-09 23:50:11,302 [main] INFO  [com.umpaytester.cbewebrest.util.TokenUtil] - {"expires_in":3600.0,"access_token":"835f9280d57e27c6dd2bbaf8f29ee347f32eb268d42520a9aa26c6dc71e2d395","meta":{"ret_code":"0000","ret_msg":"Operation succeeded"}}
+2017-11-09 23:50:11,851 [main] INFO  [com.umpaytester.cbewebrest.util.PrintUtil] - -------响应------------
+2017-11-09 23:50:11,851 [main] INFO  [com.umpaytester.cbewebrest.util.PrintUtil] - {
+	"batch":{
+		"id":"RB_KNFUUMRQGE3TCMJQHEYTAOBVGZ6DEMBRG4YTCMBZGIYDCNZRGEYDSKY",
+		"batch_no":"SKJ2017110910856"
+	},
+	"meta":{
+		"ret_code":"0000",
+		"ret_msg":"Operation succeeded"
+	},
+	"links":[
+		{
+			"href":"/receipt/batches/RB_KNFUUMRQGE3TCMJQHEYTAOBVGZ6DEMBRG4YTCMBZGIYDCNZRGEYDSKY",
+			"ref":"self",
+			"method":"GET"
+		}
+	]
+}

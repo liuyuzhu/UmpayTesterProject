@@ -1,0 +1,34 @@
+2017-11-10 11:13:24,832 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-10 11:13:24,834 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-10 11:13:26,834 [main] INFO  [com.umpaytester.utils.log.TestLog] - ----------info
+2017-11-10 11:13:26,834 [main] ERROR [com.umpaytester.utils.log.TestLog] - ----------error
+2017-11-10 11:20:27,799 [main] INFO  [com.umpaytester.timer.SpayrestTestTimer] - 定时器Thread-0开始执行:执行频率为30分钟/次
+2017-11-10 11:20:27,873 [main] INFO  [com.umpaytester.timer.SpayrestTestTimer] - 存在不成功的验证，开始邮件通知相关联系人
+2017-11-10 11:24:33,704 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 开始加载properties文件:config/log4j.properties
+2017-11-10 11:24:33,710 [main] INFO  [com.umpaytester.utils.PropertyUtil] - 加载properties文件内容完成...........
+2017-11-10 11:24:33,710 [main] INFO  [com.umpaytester.utils.PropertyUtil] - info, Console, RollingFile
+2017-11-10 11:39:29,243 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath():env.properties
+2017-11-10 11:40:28,938 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/env.properties
+2017-11-10 11:42:03,975 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/config/env.properties
+2017-11-10 11:42:38,557 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build//config/env.properties
+2017-11-10 11:42:57,424 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/config/env.properties
+2017-11-10 11:43:35,713 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:43:35,714 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/config/env.properties
+2017-11-10 11:44:45,915 [main] INFO  [com.umpaytester.utils.PropsUtil] - /D:/eclipse-workspace/UmpayTesterProject/build/classes/
+2017-11-10 11:44:45,916 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:44:45,916 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/config/env.properties
+2017-11-10 11:45:40,059 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:45:40,060 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/classes/config/env.properties
+2017-11-10 11:50:50,859 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:50:50,860 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/classes/config/env.properties
+2017-11-10 11:51:05,229 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:51:05,231 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/classes/config/+、env.properties
+2017-11-10 11:56:31,071 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 11:56:31,073 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/classes/config/env.properties
+2017-11-10 11:57:27,940 [main] INFO  [com.umpaytester.utils.PropsUtil] - /D:/eclipse-workspace/UmpayTesterProject/build/classes/config1/env.properties改路径下不存在文件env.properties
+2017-11-10 11:57:27,941 [main] INFO  [com.umpaytester.utils.PropsUtil] - 更换路径，重新检查
+2017-11-10 12:12:21,707 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 12:12:21,708 [main] INFO  [com.umpaytester.utils.PropsUtil] - /D:/eclipse-workspace/UmpayTesterProject/build/classes/config1/env.properties改路径下不存在文件env.properties
+2017-11-10 12:12:21,708 [main] INFO  [com.umpaytester.utils.PropsUtil] - 更换路径，重新检查
+2017-11-10 12:12:56,884 [main] INFO  [com.umpaytester.utils.PropsUtil] - 调用 getPropsFilePath()查询文件env.properties
+2017-11-10 12:12:56,886 [main] INFO  [com.umpaytester.utils.PropsUtil] - 路径结果为:/D:/eclipse-workspace/UmpayTesterProject/build/classes/config/env.properties

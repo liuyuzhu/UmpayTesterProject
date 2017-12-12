@@ -1,0 +1,492 @@
+package com.umpaytester.spay.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import java.util.Random;
+
+import com.test.utils.ConfigUtil;
+import com.test.utils.GetProperties;
+
+
+
+public class  SYTBean {
+	
+	
+	
+	public static String baseurl="http://10.10.178.36:8081";	
+	
+	
+
+    
+	public static String mer_id="70510000";	
+	
+
+	public  String getBaseurl() {
+		return baseurl;
+	}
+	public  void setBaseurl(String baseurl) {
+		this.baseurl = baseurl;
+	}
+	//非业务字段
+	 public static  String url=baseurl+"/fx_spay/pay/payservice.do?";
+//	 public static  String url=baseurl+"/spay/pay/payservice.do?";
+	private static String 	service;
+	private static String 	sign_type="RSA";		
+	private static String 	charset="UTF-8";		
+	private static String 	version="4.0";
+	private static String 	res_format="HTML";
+	private static String 	sign;
+	
+	
+	//业务字段
+	private static String 	acquiringByUMP;
+	private static String 	amount;
+	private static String 	card_holder="魏超";
+	private static String 	cny_amount;
+	private static String 	currency="USD";
+	private static String 	customs_code;
+	private static String 	customs_id;
+	private static String 	ec_plat_id;
+	private static String 	error_code;
+	private static String 	exchange_rate;
+	private static String 	expand="收银台测试订单";
+	private static String 	expire_time;
+	private static String 	freight;
+	private static String 	gate_id;
+	private static String 	goods_amount;
+	private static String 	goods_data;
+	private static String 	goods_inf="跨境";
+//	private static String 	identity_code="150404199308070250";
+//	private static String 	identity_code="131126198802036079";
+	private static String 	identity_code="150404199308070250";
+	private static String 	identity_type="IDENTITY_CARD";
+	private static String 	interface_type;
+	private static String 	media_id="15210909812";
+	private static String 	media_type="MOBILE";
+	private static String 	mer_bank_list;
+	private static String 	mer_cust_id; //pay_type为B2BBANK时必传，商户的每个用户在联动报备后联动分配的编号
+	private static String 	mer_date;
+	private static String 	mer_priv;
+	private static String 	mobile_id="15210909812";
+	private static String 	notifyUrl = baseurl+"/notify0000V4.jsp"; ;
+	private static String 	order_date;
+	public static String 	order_id = new SimpleDateFormat("MMddhhmmssSSS").format(new Date())+ new Random(4).nextInt(4*100);
+	
+	
+//	private static String 	card_id="6216610100010702419";
+//	private static String 	card_id="6225880153597407";
+	private static String 	card_id="6217710703095380";
+	private static String 	order_type;
+	private static String 	org_amount;
+	private static String 	pay_date;
+	private static String 	pay_elements;
+	private static String 	pay_seq;
+	private static String 	pay_type;
+	private static String 	refund_amount;
+	private static String 	refund_data;
+	private static String 	refund_no=new SimpleDateFormat("MMddhhmmssSSS").format(new Date())+ new Random(4).nextInt(4*100);
+	private static String 	refund_amt;
+	private static String 	ret_code;
+	private static String 	ret_msg;
+	private static String 	ret_url=baseurl+"/notify0000V4.jsp";
+	private static String 	risk_expand="A0001:test#A0002:test";
+	private static String 	settle_date;
+	private static String 	settle_type;
+	public static String 	sub_order_id1=order_id.substring(4)+"11";
+	public static String 	sub_order_id2=order_id.substring(4)+"12";
+	private static String 	tax;
+	public static String 	trade_no;
+	private static String 	trade_state;
+	private static String 	user_ip;
+	private static String 	usr_busi_agreement_id;
+	
+
+	
+	public static String getCard_id() {
+		return card_id;
+	}
+	public static void setCard_id(String cardId) {
+		card_id = cardId;
+	}
+	public static String getNotifyUrl() {
+		return notifyUrl;
+	}
+	public static void setNotifyUrl(String notifyUrl) {
+		SYTBean.notifyUrl = notifyUrl;
+	}
+	public static String getService() {
+		return service;
+	}
+	public void setService(String service) {
+		SYTBean.service = service;
+	}
+	public static String getSign_type() {
+		return sign_type;
+	}
+	public void setSign_type(String signType) {
+		sign_type = signType;
+	}
+	public static String getCharset() {
+		return charset;
+	}
+	public void setCharset(String charset) {
+		SYTBean.charset = charset;
+	}
+	public static String getSign() {
+		return sign;
+	}
+	public void setSign(String sign) {
+		SYTBean.sign = sign;
+	}
+	public static String getMer_id() {
+		return mer_id;
+	}
+	public void setMer_id(String merId) {
+		mer_id = merId;
+	}
+	public static String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		SYTBean.version = version;
+	}
+	public static String getRes_format() {
+		return res_format;
+	}
+	public void setRes_format(String resFormat) {
+		res_format = resFormat;
+	}
+	public String getAcquiringByUMP() {
+		return acquiringByUMP;
+	}
+	public void setAcquiringByUMP(String acquiringByUMP) {
+		SYTBean.acquiringByUMP = acquiringByUMP;
+	}
+	public static String getAmount() {
+		return amount;
+	}
+	public void setAmount(String amount) {
+		SYTBean.amount = amount;
+	}
+	public static String getCard_holder() {
+		return card_holder;
+	}
+	public void setCard_holder(String cardHolder) {
+		card_holder = cardHolder;
+	}
+	public String getCny_amount() {
+		return cny_amount;
+	}
+	public void setCny_amount(String cnyAmount) {
+		cny_amount = cnyAmount;
+	}
+	public static String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		SYTBean.currency = currency;
+	}
+	public String getCustoms_code() {
+		return customs_code;
+	}
+	public void setCustoms_code(String customsCode) {
+		customs_code = customsCode;
+	}
+	public String getCustoms_id() {
+		return customs_id;
+	}
+	public void setCustoms_id(String customsId) {
+		customs_id = customsId;
+	}
+	public String getEc_plat_id() {
+		return ec_plat_id;
+	}
+	public void setEc_plat_id(String ecPlatId) {
+		ec_plat_id = ecPlatId;
+	}
+	public String getError_code() {
+		return error_code;
+	}
+	public void setError_code(String errorCode) {
+		error_code = errorCode;
+	}
+	public String getExchange_rate() {
+		return exchange_rate;
+	}
+	public void setExchange_rate(String exchangeRate) {
+		exchange_rate = exchangeRate;
+	}
+	public static String getExpand() {
+		return expand;
+	}
+	public void setExpand(String expand) {
+		SYTBean.expand = expand;
+	}
+	public static String getExpire_time() {
+		return expire_time;
+	}
+	public void setExpire_time(String expireTime) {
+		expire_time = expireTime;
+	}
+	public String getFreight() {
+		return freight;
+	}
+	public void setFreight(String freight) {
+		SYTBean.freight = freight;
+	}
+	public static String getGate_id() {
+		return gate_id;
+	}
+	public void setGate_id(String gateId) {
+		gate_id = gateId;
+	}
+	public String getGoods_amount() {
+		return goods_amount;
+	}
+	public void setGoods_amount(String goodsAmount) {
+		goods_amount = goodsAmount;
+	}
+	public static String getGoods_data() {
+		return goods_data;
+	}
+	public void setGoods_data(String goodsData) {
+		goods_data = goodsData;
+	}
+	public static String getGoods_inf() {
+		return goods_inf;
+	}
+	public void setGoods_inf(String goodsInf) {
+		goods_inf = goodsInf;
+	}
+	public static String getIdentity_code() {
+		return identity_code;
+	}
+	public void setIdentity_code(String identityCode) {
+		identity_code = identityCode;
+	}
+	public static String getIdentity_type() {
+		return identity_type;
+	}
+	public void setIdentity_type(String identityType) {
+		identity_type = identityType;
+	}
+	public static String getInterface_type() {
+		return interface_type;
+	}
+	public void setInterface_type(String interfaceType) {
+		interface_type = interfaceType;
+	}
+	public static String getMedia_id() {
+		return media_id;
+	}
+	public void setMedia_id(String mediaId) {
+		media_id = mediaId;
+	}
+	public static String getMedia_type() {
+		return media_type;
+	}
+	public void setMedia_type(String mediaType) {
+		media_type = mediaType;
+	}
+	public String getMer_bank_list() {
+		return mer_bank_list;
+	}
+	public void setMer_bank_list(String merBankList) {
+		mer_bank_list = merBankList;
+	}
+	public static String getMer_cust_id() {
+		return mer_cust_id;
+	}
+	public void setMer_cust_id(String merCustId) {
+		mer_cust_id = merCustId;
+	}
+	public static String getMer_date() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		mer_date= format.format(new Date());
+		return mer_date;
+	}
+	public void setMer_date(String merDate) {
+		mer_date = merDate;
+	}
+	public static String getMer_priv() {
+		return mer_priv;
+	}
+	public void setMer_priv(String merPriv) {
+		mer_priv = merPriv;
+	}
+	public static String getMobile_id() {
+		return mobile_id;
+	}
+	public void setMobile_id(String mobileId) {
+		mobile_id = mobileId;
+	}
+
+	
+	public String getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(String orderDate) {
+		order_date = orderDate;
+	}
+//	public static String getOrder_id() {
+//		SimpleDateFormat format1 = new SimpleDateFormat("MMddhhmmssSSS");	
+//		String date1 = format1.format(new Date());
+//		order_id = "" + date1 + "" + new Random(4).nextInt(4*100);
+//		
+//		return order_id;
+//	}
+//	public void setOrder_id(String orderId) {
+//		order_id = orderId;
+//	}
+	public String getOrder_type() {
+		return order_type;
+	}
+	public void setOrder_type(String orderType) {
+		order_type = orderType;
+	}
+	public static String getOrg_amount() {
+		return org_amount;
+	}
+	public void setOrg_amount(String orgAmount) {
+		org_amount = orgAmount;
+	}
+	public String getPay_date() {
+		return pay_date;
+	}
+	public void setPay_date(String payDate) {
+		pay_date = payDate;
+	}
+	public String getPay_elements() {
+		return pay_elements;
+	}
+	public void setPay_elements(String payElements) {
+		pay_elements = payElements;
+	}
+	public String getPay_seq() {
+		return pay_seq;
+	}
+	public void setPay_seq(String paySeq) {
+		pay_seq = paySeq;
+	}
+	public static String getPay_type() {
+		return pay_type;
+	}
+	public void setPay_type(String payType) {
+		pay_type = payType;
+	}
+	public static String getSettle_type() {
+		return settle_type;
+	}
+	public static void setSettle_type(String settleType) {
+		settle_type = settleType;
+	}
+	public String getRefund_amount() {
+		return refund_amount;
+	}
+	public void setRefund_amount(String refundAmount) {
+		refund_amount = refundAmount;
+	}
+	public static String getRefund_data() {
+		return refund_data;
+	}
+	public void setRefund_data(String refundData) {
+		refund_data = refundData;
+	}
+	public static String getRefund_no() {
+		return refund_no;
+	}
+	public void setRefund_no(String refundNo) {
+		refund_no = refundNo;
+	}
+	public String getRet_code() {
+		return ret_code;
+	}
+	public void setRet_code(String retCode) {
+		ret_code = retCode;
+	}
+	public String getRet_msg() {
+		return ret_msg;
+	}
+	public void setRet_msg(String retMsg) {
+		ret_msg = retMsg;
+	}
+	public static String getRet_url() {
+		return ret_url;
+	}
+	public void setRet_url(String retUrl) {
+		ret_url = retUrl;
+	}
+	public static String getRisk_expand() {
+		return risk_expand;
+	}
+	public void setRisk_expand(String riskExpand) {
+		risk_expand = riskExpand;
+	}
+	public static String getSettle_date() {
+		Date d=new Date();   
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		settle_date= format.format(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000));
+		return settle_date;
+	}
+	public void setSettle_date(String settleDate) {
+		settle_date = settleDate;
+	}
+	
+	public String getTax() {
+		return tax;
+	}
+	public void setTax(String tax) {
+		SYTBean.tax = tax;
+	}
+	public static String getTrade_no() {
+		return trade_no;
+	}
+	public void setTrade_no(String tradeNo) {
+		trade_no = tradeNo;
+	}
+	public String getTrade_state() {
+		return trade_state;
+	}
+	public void setTrade_state(String tradeState) {
+		trade_state = tradeState;
+	}
+	public static String getUser_ip() throws UnknownHostException {
+		InetAddress user_ip=InetAddress.getLocalHost();
+		return user_ip.toString();
+	}
+	public void setUser_ip(String userIp) {
+		user_ip = userIp;
+	}
+	public String getUsr_busi_agreement_id() {
+		return usr_busi_agreement_id;
+	}
+	public void setUsr_busi_agreement_id(String usrBusiAgreementId) {
+		usr_busi_agreement_id = usrBusiAgreementId;
+	}
+	public static void setSub_order_id1(String sub_order_id1) {
+		SYTBean.sub_order_id1 = sub_order_id1;
+	}
+	public static String getSub_order_id1() {
+		return sub_order_id1;
+	}
+	public static void setSub_order_id2(String sub_order_id2) {
+		SYTBean.sub_order_id2 = sub_order_id2;
+	}
+	public static String getSub_order_id2() {
+		return sub_order_id2;
+	}
+	public static void setRefund_amt(String refund_amt) {
+		SYTBean.refund_amt = refund_amt;
+	}
+	public static String getRefund_amt() {
+		return refund_amt;
+	}
+
+
+
+}

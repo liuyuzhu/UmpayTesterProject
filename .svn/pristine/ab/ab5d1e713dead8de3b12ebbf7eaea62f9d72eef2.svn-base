@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=gbk"%>
+
+<html>
+  <head>
+    
+    <title>My JSP 'tableTest.jsp' starting page</title>
+    
+   
+  </head>
+  
+  <body>
+    <%!
+    public class Person
+    {
+       public String name;
+       public int age;
+       protected String phoneNumber;
+       public Person(String aName,int anAge,String aPhone)
+       {
+          name=aName;
+          age=anAge;
+          phoneNumber = aPhone;
+       
+       }
+       public String getPhoneNumber()
+       {
+          return phoneNumber;
+       
+       }
+    
+    }
+ %>
+ 
+ <%
+ Person[] people=new Person[]{
+ new Person("XXXXX",7,"04137130367"),
+  new Person("YYYYYYY",7,"13588880514"),
+   new Person("CCCCCCCCC",29,"13888429840"),
+    new Person("AAAAAAAA",30,"13868137859")
+   };
+   request.setAttribute("people",people);
+ %>
+ <jsp:include page="/TableServlet" flush="true">
+ <jsp:param name="data" value="people"/>
+ <jsp:param name="tableOptions" value="border=4"/>
+ <jsp:param name="column" value="name"/>
+ <jsp:param name="columnType" value="data"/>
+ <jsp:param name="columnHeader" value="Name"/>
+ 
+ 
+ <jsp:param name="column" value="age"/>
+ <jsp:param name="columnType" value="data"/>
+ <jsp:param name="columnHeader" value="Age"/>
+ 
+ 
+ <jsp:param name="column" value="getPhoneNumber"/>
+ <jsp:param name="columnType" value="data"/>
+ <jsp:param name="columnHeader" value="Phone#"/>
+ 
+ 
+ </jsp:include>
+  </body>
+</html>

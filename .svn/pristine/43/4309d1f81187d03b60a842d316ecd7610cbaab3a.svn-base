@@ -1,0 +1,34 @@
+package com.umpaytester.cbewebrest;
+
+import com.google.gson.Gson;
+import com.umpaytester.cbewebrest.util.JsonPrintUtil;
+import com.umpaytester.cbewebrest.util.PrintUtil;
+import com.umpaytester.cbewebrest.util.TestUtil;
+import com.umpaytester.utils.log.Logger;
+
+public class MainTest {
+	static Logger log=Logger.getLogger(MainTest.class);  
+	public static void httpPost(Object obj,String merId,String uri) throws Exception{
+		String urll = uri.substring(0, uri.indexOf("cbeweb_rest")+11);
+		String port = uri.substring(uri.indexOf("cbeweb_rest")+11,uri.length());
+		String json = new Gson().toJson(obj);
+		PrintUtil.printInConsole("-------请求------------");
+		JsonPrintUtil.formatJson(json);
+		String result = TestUtil.sendMsg(merId, urll, port, json, "POST");
+		PrintUtil.printInConsole("-------响应------------");
+		JsonPrintUtil.formatJson(result);
+		
+	}
+	
+	public static void httpGet(String merId,String uri) throws Exception{
+		PrintUtil.printInConsole("-------请求------------");
+		String urll = uri.substring(0, uri.indexOf("cbeweb_rest")+11);
+		String port = uri.substring(uri.indexOf("cbeweb_rest")+11,uri.length());
+		JsonPrintUtil.formatJson(uri);
+		String result = TestUtil.sendMsg(merId, urll, port, null, "GET");
+		PrintUtil.printInConsole("-------响应------------");
+		JsonPrintUtil.formatJson(result);
+		
+	}
+	
+}

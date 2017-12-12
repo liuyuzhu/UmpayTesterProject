@@ -1,0 +1,83 @@
+package com.umpaytester.shell.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.umpaytester.utils.log.Logger;
+import com.umpaytester.utils.ssh.EXEShell;
+
+/**
+ * Servlet implementation class LinuxShellServlet
+ */
+@WebServlet("/LinuxShellServlet")
+public class LinuxShellServlet extends HttpServlet {
+    static	Map<String, String> result = null;
+	static Logger log = Logger.getLogger(LinuxShellServlet.class);
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LinuxShellServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.info("接收前端执行shell命令请求");
+		request.setCharacterEncoding("UTF-8") ;
+
+			
+			EXEShell ssh = new EXEShell();
+			String cmd =request.getParameter("commonds") ;
+			String ip = request.getParameter("ip");
+			
+			result=ssh.runDistanceShellN(cmd, "mpsp", "mpsp4321", ip);
+//			result=ssh.disposeResultMessage(cmd, "mpsp", "mpsp4321", ip);
+			
+			 response.setContentType("text/html; charset=UTF-8"); 
+				response.setCharacterEncoding("UTF-8") ;
+				PrintWriter out =  response.getWriter();
+//				response.getWriter().write(resMsg.replaceAll("<", "").replaceAll(">", ""));
+				out.println("<HTML>");
+				out.println("<HEAD><TITLE>返回结果为：</TITLE></HEAD>");
+				out.println("<BODY>");
+//				 out.println(" 返回结果：");
+//				 out.println("<table width=\"600\"  border=\"1\">");
+				 
+				 
+				 Iterator<Entry<String, String>> it = result.entrySet().iterator();
+				          while (it.hasNext()) {
+				               Entry<String, String> entry = it.next();
+				                 out.println("执行命令： " +"</br>" + entry.getKey() +"</br>" + entry.getValue());
+//				                 log.info(info);
+				          }
+				 out.println("<tr>");				
+				 out.println("</table>");
+				 out.println("</BODY>");
+				
+				out.println("</HTML>");
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

@@ -1,0 +1,48 @@
+package com.umpaytester.cbewebrest.test;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.umpaytester.cbewebrest.MainTest;
+import  com.umpaytester.utils.log.Logger;
+
+import com.umpaytester.cbewebrest.util.PrintUtil;
+import com.umpaytester.cbewebrest.util.SJHUtil;
+
+
+public class main {
+	static Logger log=Logger.getLogger(main.class);  
+
+	public static void main(String[] args) throws Exception {
+        log.info("           - 收结汇上传文件测试开始--------");
+		//文件自动生成
+		SJHUtil sjh= new SJHUtil();
+		sjh.createTxt();
+		
+        //上传txt文件
+		String ip="10.10.178.36";
+		String ipPath="/usr/mpsp/data/ftp/merchant/70510002";
+		
+		sjh.upLoad(ip, ipPath, sjh.filePath, sjh.fileName);
+		
+	
+		
+		//文件
+	  
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("notify_url", "www.ww.ww");
+		Map<String, String> mm = new HashMap<String, String>();
+		mm.put("batch_date",sjh.batchDate );
+		mm.put("batch_no", sjh.batchNo);
+		mm.put("file_name",sjh.fileName);
+		mm.put("file_path", "/");
+		mm.put("currency", "USD");
+		m.put("batch", mm);
+	
+		MainTest.httpPost(m, "70510002", "http://10.10.178.36:8071/cbeweb_rest/receipt/batches");
+
+	}
+        
+        
+}
