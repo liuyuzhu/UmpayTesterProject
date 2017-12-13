@@ -23,17 +23,17 @@ public class TestBF221016 {
 	public static String rest = "http://10.10.178.34:19998";//测试环境
 	static int j =0;
 	public static void main(String[] args) {
-//		 TestBF221016.TestBF221016(""+"20171208");
-		for (int i = 20171101; i < i+1; 	i++) {
-		 j++;
-		 
-		 
-		 
-		 if(j<31) {
-			 TestBF221016.TestBF221016(""+i);
-			log.info("处理日期："+i);
-		 }
-		}
+		 TestBF221016.TestBF221016(""+"20171212");
+//		for (int i = 20171201; i < i+1; 	i++) {
+//		 j++;
+//		 
+//		 
+//		 
+//		 if(j<31) {
+//			 TestBF221016.TestBF221016(""+i);
+//			log.info("处理日期："+i);
+//		 }
+//		}
 	}
 	public static void TestBF221016(String handleDate){
 		
